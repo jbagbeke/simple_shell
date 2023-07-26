@@ -9,17 +9,36 @@
  */
 void ex_it(char *buf, char **argv, int i)
 {
+	char *status, *error, exit_str[12];
+	int exit_status, j;
+
 	if (str_len(buf) > 4)
 	{
-		perror("Error (exit)");
-		free_arr(argv, i);
-		free(buf);
+	status = buf + 5;
+	for (j = 0; j < str_len(status); j++)
+	{
+	if (status[j] < '0' || status[j] > '9')
+	{
+	error = "Error: Invalid exit status argument\n";
+	write(STDOUT_FILENO, error, str_len(error));
+	free_arr(argv, i);
+	free(buf);
+	_exit(EXIT_FAILURE);
+	}
+	}
+	exit_status = at_oi(status);
+	free_arr(argv, i);
+	free(buf);
+
+	it_oa(exit_status, exit_str);
+
+	_exit(exit_status);
 	}
 	else
 	{
-		free_arr(argv, i);
-		free(buf);
-		exit(0);
+	free_arr(argv, i);
+	free(buf);
+	_exit(0);
 	}
 }
 
