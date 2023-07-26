@@ -43,6 +43,6 @@ void get_one(char *buffer, char *t_buffer, int i);
 char *tokenise(char *buffer, const char *delim);
 int pr_f(int fd, const char *format, ...);
 int it_oa(int num, char *str);
-
+void spa_ces(char *command);
 
 #endif

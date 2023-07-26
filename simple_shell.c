@@ -23,7 +23,8 @@ int main(int argc, char **argv)
 
 		args = str_tok(buffer, " ", num);
 		i = b;
-
+		if (*buffer == '\0' || buffer == NULL)
+		continue;
 		_path(argv, buffer, args, i, a);
 		a++;
 	}

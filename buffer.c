@@ -12,4 +12,6 @@ void bu_ffer(char *buffer)
 		put_char('\n');
 		_exit(EXIT_SUCCESS);
 	}
+
+	spa_ces(buffer);
 }
