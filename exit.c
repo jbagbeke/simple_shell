@@ -9,9 +9,18 @@
  */
 void ex_it(char *buf, char **argv, int i)
 {
+	if (str_len(buf) > 4)
+	{
+		perror("Error (exit)");
+		free_arr(argv, i);
+		free(buf);
+	}
+	else
+	{
 		free_arr(argv, i);
 		free(buf);
 		exit(0);
+	}
 }
 
 
