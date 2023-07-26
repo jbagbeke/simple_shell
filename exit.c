@@ -9,24 +9,9 @@
  */
 void ex_it(char *buf, char **argv, int i)
 {
-	char *status_str;
-	int exit_status;
-
-	if (str_len(buf) > 4)
-	{
-	status_str = buf + 5;
-	exit_status = at_oi(status_str);
-
-	free_arr(argv, i);
-	free(buf);
-	exit(exit_status);
-	}
-	else
-	{
 		free_arr(argv, i);
 		free(buf);
 		exit(0);
-	}
 }
 
 
