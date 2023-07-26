@@ -54,7 +54,7 @@ void exe(char **argv, int i)
 	{
 	pid_t ppid = waitpid(cpid, &stat, 0);
 
-	if (ppid == -1 || WIFEXITED(stat))
+	if (ppid == -1)
 	{
 		perror("Error (Parent Process)");
 		free_arr(argv, i);
