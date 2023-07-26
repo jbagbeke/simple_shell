@@ -1,47 +1,33 @@
 #include "shell.h"
-
 /**
- * main - The main function for code execution
- * @argc: Argument counter
- * @argv: Argument vector
- * Return: An int(0, Success)
+ * main - Entry point of shell
+ * Return: 0 on success
  */
-int main(int argc, char **argv)
+int main(void)
 {
-	char **args, *buffer, *prompt = "$ ";
-	bool is_pipe = false;
-	int i, b, a = 1, *num = &b;
+	char *command = NULL, **args;
+	char *prompt = "$ ";
+	size_t buffer_size = 0;
+	int *num, i, b;
 
-	(void)argc;
-	while (1 && !is_pipe)
-{
-	if (isatty(STDIN_FILENO) == 0)
+	num = &b;
+	while (true)
 	{
-	while ((buffer = get_line(STDIN_FILENO)) != NULL)
+	write(STDOUT_FILENO, prompt, 2);
+
+	if (getline(&command, &buffer_size, stdin) == -1)
 	{
-		bu_ffer(buffer);
-
-		args = str_tok(buffer, " ", num);
-		i = b;
-
-		_path(argv, buffer, args, i, a);
-		a++;
+	put_char('\n');
+	break;
 	}
-		is_pipe = true;
-	}
-	else
-	{
-		write(STDOUT_FILENO, prompt, 2);
-		buffer = get_line(STDIN_FILENO);
-		bu_ffer(buffer);
-		if (*buffer == '\0')
-		continue;
-		args = str_tok(buffer, " ", num);
-			i = b;
 
-		_path(argv, buffer, args, i, a);
-		a++;
+	args = str_tok(command, " ", num);
+	i = b;
+	exe_cve(args, i);
+
+	free(command);
+	free(args);
 	}
-}
 	return (0);
 }
+
