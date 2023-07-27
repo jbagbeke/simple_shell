@@ -3,10 +3,11 @@
 /**
  * exe_cve - Function to execute command
  * @argv: Null terminated string array
+ * @buffer: Pointer to string read
  * @i: Number of tokens
  * Return: Void
  */
-void exe_cve(char **argv, int i)
+void exe_cve(char **argv, char *buffer, int i)
 {
 	const char *exist = argv[0];
 
@@ -19,10 +20,12 @@ void exe_cve(char **argv, int i)
 	if (access(exist, X_OK) != 0)
 	{
 	perror("Error (execve)");
+	free_arr(argv, i);
+	free(buffer);
 	_exit(EXIT_FAILURE);
 	}
 
-	exe(argv, i);
+	exe(argv, buffer, i);
 }
 
 /**
@@ -31,7 +34,7 @@ void exe_cve(char **argv, int i)
  * @i: Number of tokens
  * Return: Void
  */
-void exe(char **argv, int i)
+void exe(char **argv, char *buffer, int i)
 {
 	int stat;
 
@@ -41,6 +44,7 @@ void exe(char **argv, int i)
 	{
 		perror("Error (fork)");
 		free_arr(argv, i);
+		free(buffer);
 		_exit(EXIT_FAILURE);
 	}
 	else if (cpid == 0)
@@ -48,6 +52,7 @@ void exe(char **argv, int i)
 		execve(argv[0], argv, environ);
 		perror("Error (execve)");
 		free_arr(argv, i);
+		free(buffer);
 		_exit(EXIT_FAILURE);
 	}
 	else
@@ -58,6 +63,7 @@ void exe(char **argv, int i)
 	{
 		perror("Error (Parent Process)");
 		free_arr(argv, i);
+		free(buffer);
 		_exit(EXIT_FAILURE);
 	}
 	}

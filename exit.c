@@ -9,39 +9,25 @@
  */
 void ex_it(char *buf, char **argv, int i)
 {
-	char *status, *error, exit_str[12];
-	int exit_status, j;
+	char *status_str;
+	int exit_status;
 
 	if (str_len(buf) > 4)
 	{
-	status = buf + 5;
-	for (j = 0; j < str_len(status); j++)
-	{
-	if (status[j] < '0' || status[j] > '9')
-	{
-	error = "Error: Invalid exit status argument\n";
-	write(STDOUT_FILENO, error, str_len(error));
+	status_str = buf + 5;
+	exit_status = at_oi(status_str);
+
 	free_arr(argv, i);
 	free(buf);
-	_exit(EXIT_FAILURE);
-	}
-	}
-	exit_status = at_oi(status);
-	free_arr(argv, i);
-	free(buf);
-
-	it_oa(exit_status, exit_str);
-
-	_exit(exit_status);
+	exit(exit_status);
 	}
 	else
 	{
-	free_arr(argv, i);
-	free(buf);
-	_exit(0);
+		free_arr(argv, i);
+		free(buf);
+		exit(0);
 	}
 }
-
 
 /**
  *en_v - Function to print environment variables

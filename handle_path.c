@@ -41,7 +41,7 @@ void _path(char **argv, char *buffer, char **args, int i, int a)
 		args[0] = f_path;
 	}
 	}
-		exe_cve(args, i);
+		exe_cve(args, buffer, i);
 		free_arr(args, i);
 		free(buffer);
 	}
