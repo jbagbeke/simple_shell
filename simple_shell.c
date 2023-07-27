@@ -19,12 +19,10 @@ int main(int argc, char **argv)
 	{
 	while ((buffer = get_line(STDIN_FILENO)) != NULL)
 	{
-		bu_ffer(buffer);
-
-		args = str_tok(buffer, " ", num);
-		i = b;
 		if (bu_ffer(buffer))
 		continue;
+		args = str_tok(buffer, " ", num);
+		i = b;
 		_path(argv, buffer, args, i, a);
 		a++;
 	}
