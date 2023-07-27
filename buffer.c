@@ -3,9 +3,9 @@
 /**
  * bu_ffer - Carries out EOF condition
  * @buffer: Command pointer
- * Return: Void
+ * Return: True if error or false otherwise
  */
-void bu_ffer(char *buffer)
+bool bu_ffer(char *buffer)
 {
 	if (!buffer)
 	{
@@ -14,4 +14,13 @@ void bu_ffer(char *buffer)
 	}
 
 	spa_ces(buffer);
+
+	if (*buffer == '\0' || buffer == NULL)
+	{
+		free(buffer);
+		return (true);
+	}
+
+	return (false);
+
 }

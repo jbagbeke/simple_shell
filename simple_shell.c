@@ -23,7 +23,7 @@ int main(int argc, char **argv)
 
 		args = str_tok(buffer, " ", num);
 		i = b;
-		if (*buffer == '\0' || buffer == NULL)
+		if (bu_ffer(buffer))
 		continue;
 		_path(argv, buffer, args, i, a);
 		a++;
@@ -34,8 +34,7 @@ int main(int argc, char **argv)
 	{
 		write(STDOUT_FILENO, prompt, 2);
 		buffer = get_line(STDIN_FILENO);
-		bu_ffer(buffer);
-		if (*buffer == '\0' || buffer == NULL)
+		if (bu_ffer(buffer))
 		continue;
 		args = str_tok(buffer, " ", num);
 			i = b;

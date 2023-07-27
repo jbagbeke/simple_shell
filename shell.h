@@ -38,7 +38,7 @@ void exe(char **argv, char *buffer, int i);
 char *get_line(int fd);
 int put_char(char ch);
 void _path(char **argv, char *buffer, char **args, int i, int a);
-void bu_ffer(char *buffer);
+bool bu_ffer(char *buffer);
 void get_one(char *buffer, char *t_buffer, int i);
 char *tokenise(char *buffer, const char *delim);
 int pr_f(int fd, const char *format, ...);
