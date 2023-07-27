@@ -35,6 +35,7 @@ char *get_line(int fd)
 		return (NULL);
 	}
 		get_one(buffer, t_buffer, i);
+		buffer = t_buffer;
 	}
 }
 	if (bytes == -1 || (bytes == 0 && i == 0))
@@ -42,6 +43,7 @@ char *get_line(int fd)
 		free(buffer);
 		return (NULL);
 	}
+	spa_ces(buffer);
 	return (buffer);
 }
 

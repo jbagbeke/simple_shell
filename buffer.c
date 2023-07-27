@@ -13,8 +13,6 @@ bool bu_ffer(char *buffer)
 		_exit(EXIT_SUCCESS);
 	}
 
-	spa_ces(buffer);
-
 	if (*buffer == '\0' || buffer == NULL)
 	{
 		free(buffer);

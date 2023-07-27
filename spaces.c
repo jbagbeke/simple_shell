@@ -2,41 +2,42 @@
 
 /**
  * spa_ces - Removes leading and trailing spaces
- * @command: Chars read
+ * @command: Pointer to string to de-spaced
  * Return: Void
  */
 void spa_ces(char *command)
 {
-	char *src = command;
-	char *dest = command;
-	int first_non_space_found = 0;
+	char *src = command, *end;
 
 	while (*src == ' ')
 	{
 	src++;
 	}
 
-	while (*src)
+	if (*src == '\0')
 	{
-	if (*src != ' ' || first_non_space_found)
-	{
-	*dest = *src;
-
-	if (*src != ' ')
-	{
-	first_non_space_found = 1;
+	*command = '\0';
+	return;
 	}
 
-	dest++;
+	end = src;
+	while (*end)
+	{
+	end++;
 	}
+	end--;
+	while (end > src && *end == ' ')
+	{
+	end--;
+	}
+	end++;
 
+	while (src < end)
+	{
+	*command = *src;
+	command++;
 	src++;
 	}
 
-	while (dest > command && *(dest - 1) == ' ')
-	{
-	dest--;
-	}
-
-	*dest = '\0';
+	*command = '\0';
 }
