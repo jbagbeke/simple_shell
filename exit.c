@@ -12,10 +12,6 @@ void ex_it(char *buf, char **argv, char **args, int a, int i)
 	char *status_str, *err, str[INIT];
 	int exit_status;
 
-	(void)err;
-	(void)args;
-	(void)a;
-
 	err = "exit: Illegal number";
 	if (str_len(buf) > 4)
 	{
@@ -33,6 +29,7 @@ void ex_it(char *buf, char **argv, char **args, int a, int i)
 	{
 		free_arr(argv, i);
 		free(buf);
+		pr_f(STDERR_FILENO, "%s: %d: %s: %s\n", args[0], a, err, str);
 		exit(2);
 	}
 	}
