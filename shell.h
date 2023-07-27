@@ -29,8 +29,8 @@ char *con_cat(int len, ...);
 char *file_path(char *filename, struct stat *f_stat);
 int at_oi(char *str);
 void en_v(char **argv, int i);
-void ex_it(char *buf, char **argv, int i);
-bool built_in(char *buf, char **argv, int i);
+void ex_it(char *buf, char **argv, char **args, int a, int i);
+bool built_in(char *buf, char **argv, char **args, int a, int i);
 void exe_cve(char **argv, char *buffer, int i);
 char *get_env(char *env_key);
 void write_str(char *str);
@@ -44,5 +44,6 @@ char *tokenise(char *buffer, const char *delim);
 int pr_f(int fd, const char *format, ...);
 int it_oa(int num, char *str);
 void spa_ces(char *command);
+bool va_lid(char *str);
 
 #endif

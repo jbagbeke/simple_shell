@@ -18,7 +18,7 @@ void _path(char **argv, char *buffer, char **args, int i, int a)
 	buff = "not found";
 	for (j = 0; j < 1; j++)
 	{
-	if (built_in(buffer, args, i))
+	if (built_in(buffer, args, argv, a, i))
 	{
 		free(buffer);
 		continue;

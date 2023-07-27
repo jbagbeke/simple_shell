@@ -7,14 +7,18 @@
  * @i: Number of tokens
  * Return: Void
  */
-void ex_it(char *buf, char **argv, int i)
+void ex_it(char *buf, char **argv, char **args, int a, int i)
 {
-	char *status_str;
+	char *status_str, *err, str[INIT];
 	int exit_status;
 
+	err = "exit: Illegal number";
 	if (str_len(buf) > 4)
 	{
 	status_str = buf + 5;
+	str_cpy(str, status_str);
+	if (va_lid(status_str))
+	{
 	exit_status = at_oi(status_str);
 
 	free_arr(argv, i);
@@ -25,7 +29,9 @@ void ex_it(char *buf, char **argv, int i)
 	{
 		free_arr(argv, i);
 		free(buf);
-		exit(0);
+		pr_f(STDERR_FILENO, "%s: %d: %s: %s\n", args[0], a, err, str);
+		exit(2);
+	}
 	}
 }
 
@@ -61,6 +67,44 @@ void write_str(char *str)
 	write(STDOUT_FILENO, str, len);
 }
 
+/**
+ * va_lid - Checks if string is an integer
+ * @str: String to be checked
+ * Return: true if valid and false otherwise
+ */
+bool va_lid(char *str)
+{
+	int i;
+
+	if (str == NULL || *str == '\0')
+	{
+	return (false);
+	}
+
+	i = 0;
+
+	if (str[i] == '+' || str[i] == '-')
+	{
+	i++;
+	}
+
+	if (str[i] < '0' || str[i] > '9')
+	{
+	return (false);
+	}
+
+	while (str[i] != '\0')
+	{
+	if (str[i] < '0' || str[i] > '9')
+	{
+	return (false);
+	}
+	i++;
+	}
+
+	return (true);
+}
+
 
 /**
  * built_in - Function that checks env and exit
@@ -69,11 +113,11 @@ void write_str(char *str)
  * @buf: Pointer to command
  * Return: Void
  */
-bool built_in(char *buf, char **argv, int i)
+bool built_in(char *buf, char **argv, char **args, int a, int i)
 {
 	if (str_cmp(argv[0], "exit", 4) == 0)
 	{
-		ex_it(buf, argv, i);
+		ex_it(buf, argv, args, a, i);
 	}
 
 	if (str_cmp(argv[0], "env", 3) == 0 || str_cmp(argv[0], "printenv", 8) == 0)
