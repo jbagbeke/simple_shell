@@ -36,7 +36,7 @@ void exe_cve(char **argv, char *buffer, int i)
  */
 void exe(char **argv, char *buffer, int i)
 {
-	int stat;
+	int stat, exit_stat;
 
 	pid_t cpid = fork();
 
@@ -45,7 +45,7 @@ void exe(char **argv, char *buffer, int i)
 		perror("Error (fork)");
 		free_arr(argv, i);
 		free(buffer);
-		_exit(EXIT_FAILURE);
+		exit(1);
 	}
 	else if (cpid == 0)
 	{
@@ -53,18 +53,15 @@ void exe(char **argv, char *buffer, int i)
 		perror("Error (execve)");
 		free_arr(argv, i);
 		free(buffer);
-		_exit(EXIT_FAILURE);
+		exit(2);
 	}
 	else
 	{
-	pid_t ppid = waitpid(cpid, &stat, 0);
+	waitpid(cpid, &stat, 0);
 
-	if (ppid == -1)
+	if (WIFEXITED(stat))
 	{
-		perror("Error (Parent Process)");
-		free_arr(argv, i);
-		free(buffer);
-		_exit(EXIT_FAILURE);
+		exit_stat = WEXITSTATUS(stat);
 	}
 	}
 }
