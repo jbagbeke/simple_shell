@@ -83,7 +83,7 @@ bool va_lid(char *str)
 
 	i = 0;
 
-	if (str[i] == '+' || str[i] == '-')
+	if (str[i] == '+')
 	{
 	i++;
 	}
