@@ -37,9 +37,9 @@ void exe_cve(char **argv, char *buffer, int i)
 void exe(char **argv, char *buffer, int i)
 {
 	int stat, exit_stat;
-
 	pid_t cpid = fork();
 
+	(void)exit_stat;
 	if (cpid == -1)
 	{
 		perror("Error (fork)");
